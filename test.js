@@ -2,21 +2,13 @@ import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import {mount} from './enzyme/build/index';
-
-import TestComponent from './src';
-
 chai.use(chaiEnzyme());
 
 
-class Component extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello, world</h1>
-      </div>
-    );
-  }
-}
+const Product = ({ price, quantity, title }) =>
+    <div> {title} - &#36;{price} {quantity ? `x ${quantity}` : null} </div>
+
+
 
 /**
  * Change the `describe` and `it` block so it acurately describes
@@ -24,8 +16,8 @@ class Component extends React.Component {
  */
 
 describe('A failing a test suite', () => {
-  it('should be an example of a failing test suite', () => {
-    const wrapper = mount(<TestComponent name='testing'/>);
-    expect(wrapper.find('h1').length).to.equal(1)
+  it('fails when trying to call `text()` on an SFC', () => {
+    const component = mount(<Product price={20} quantity={4} title='item'/>);
+    component.text();
   })
 })
