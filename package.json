@@ -7,7 +7,7 @@
     "test": "node versions && mocha --require setup.js --compilers js:babel-register",
     "react:clean": "rimraf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils",
     "react:13": "npm run react:clean && npm i react@0.13",
-    "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14 react-addons-test-utils@01.14",
+    "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
     "react:15": "npm run react:clean && npm i react@15 react-dom@15 react-addons-test-utils@15",
     "enzyme:clean": "rimraf node_modules/enzyme",
     "enzyme:latest": "npm run enzyme:clean && npm i enzyme",
