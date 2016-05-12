@@ -1,11 +1,16 @@
 import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import {mount} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 
 chai.use(chaiEnzyme());
 
 class TestComponent extends React.Component {
+
+  static defaultProps = {
+    name: 'Brandon'
+  }
+
   render() {
     return (
       <div>
@@ -20,9 +25,13 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
+describe('defaultProps', () => {
+  it('It should parse defaultProps with mount', () => {
     const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+    expect(wrapper.props().name).to.equal('Brandon')
+  });
+  it('It should parse defaultProps with shallow', () => {
+    const wrapper = shallow(<TestComponent/>);
+    expect(wrapper.props().name).to.equal('Brandon')
   });
 })
