@@ -1,28 +1,24 @@
 import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import {mount} from 'enzyme';
+import {shallow} from 'enzyme';
+import sinon from 'sinon';
 
 chai.use(chaiEnzyme());
 
-class TestComponent extends React.Component {
-  render() {
+const ButtonComponent = React.createClass({
+  render: function() {
     return (
-      <div>
-        <h1>Hello, {this.props.name}</h1>
-      </div>
+      <button onClick={this.props.onClick}>{this.props.children}</button>
     );
   }
-}
+})
 
-/**
- * Change the `describe` and `it` block so it acurately describes
- * the test that you are trying to reproduce.
- */
-
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
-    const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+describe('Issue #404', () => {
+  it('Should call the onClick prop when click is simulated', () => {
+    const mockOnClick = sinon.spy();
+    const wrapper = shallow(<ButtonComponent onClick={mockOnClick}/>);
+    wrapper.find('button').simulate('click');
+    expect(mockOnClick.calledOnce).to.be.true;
   });
 })
