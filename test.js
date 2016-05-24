@@ -2,15 +2,13 @@ import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import {mount} from 'enzyme';
-
 chai.use(chaiEnzyme());
 
-class TestComponent extends React.Component {
+
+class App extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Hello, {this.props.name}</h1>
-      </div>
+      <div>Hello, world</div>
     );
   }
 }
@@ -20,9 +18,9 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
-    const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+describe('Repro case for issue #401', () => {
+  it('shouldnt throw when calling parent() in findWhere()', () => {
+    const wrapper = mount(<App/>);
+    wrapper.findWhere(n => n.parent())
   });
 })
