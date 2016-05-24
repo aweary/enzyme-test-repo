@@ -18,4 +18,10 @@ export class Foo extends React.Component {
     }
 }
 
-export const FooEnhanced = Foo;
+export const FooEnhanced = enhance(Foo);
+
+export class Container extends React.Component {
+    render() {
+        return (<FooEnhanced />);
+    }
+}
