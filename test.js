@@ -9,7 +9,7 @@ class TestComponent extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello, {this.props.name}</h1>
+        <h1 data-foo='foo bar'>Hello, {this.props.name}</h1>
       </div>
     );
   }
@@ -20,9 +20,9 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
+describe('Issue 416', () => {
+  it('Should query attributes with spaces in their values', () => {
     const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+    expect(wrapper.find('[data-foo="foo bar"]')).to.have.length(1)
   });
 })
