@@ -8,21 +8,17 @@ chai.use(chaiEnzyme());
 class TestComponent extends React.Component {
   render() {
     return (
-      <div>
+      <div data-foo='foo.bar'>
         <h1>Hello, {this.props.name}</h1>
       </div>
     );
   }
 }
 
-/**
- * Change the `describe` and `it` block so it acurately describes
- * the test that you are trying to reproduce.
- */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
+describe('Issue #439', () => {
+  it('should find attributes with dots in the value', () => {
     const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+    expect(wrapper.find('[data-foo="foo.bar"]')).to.have.length(1);
   });
 })
