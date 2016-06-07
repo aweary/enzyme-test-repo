@@ -2,14 +2,20 @@ import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import {mount} from 'enzyme';
+import sinon from 'sinon';
 
 chai.use(chaiEnzyme());
 
 class TestComponent extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
-        <h1>Hello, {this.props.name}</h1>
+        <input onKeyDown={this.props.onKeyDown} />
       </div>
     );
   }
@@ -20,9 +26,12 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
-    const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+describe('Issue #331', () => {
+  it('It should simulate keydown events', () => {
+    const onKeyDown = sinon.spy();
+    const wrapper = mount(<TestComponent onKeyDown={onKeyDown}/>);
+    const input = wrapper.find('input');
+    input.simulate('keyDown', {keyCode: 40});
+    expect(onKeyDown.called).to.be.true;
   });
 })
