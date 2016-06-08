@@ -6,16 +6,12 @@ import sinon from 'sinon';
 
 chai.use(chaiEnzyme());
 
-class TestComponent extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
+class BigCode extends React.Component {
 
   render() {
     return (
       <div>
-        <input onKeyDown={this.props.onKeyDown} />
+        <span className='foo'>{this.props.code}</span>
       </div>
     );
   }
@@ -26,12 +22,9 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('Issue #331', () => {
-  it('It should simulate keydown events', () => {
-    const onKeyDown = sinon.spy();
-    const wrapper = mount(<TestComponent onKeyDown={onKeyDown}/>);
-    const input = wrapper.find('input');
-    input.simulate('keyDown', {keyCode: 40});
-    expect(onKeyDown.called).to.be.true;
+describe('Starys issue in Discord', () => {
+  it('It query a single prop', () => {
+    const wrapper = mount(<BigCode code='test'/>);
+    expect(wrapper.prop('code')).to.equal('test');
   });
 })
