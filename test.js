@@ -2,27 +2,22 @@ import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import {mount} from 'enzyme';
-
+import sinon from 'sinon'
 chai.use(chaiEnzyme());
 
-class TestComponent extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello, {this.props.name}</h1>
-      </div>
-    );
-  }
-}
+import DemoApp from './src'
 
 /**
  * Change the `describe` and `it` block so it acurately describes
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
-    const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
-  });
-})
+ describe('DemoApp Test', () => {
+     it('should not show "failure" in console', () => {
+        sinon.spy(console, 'log')
+        const wrapper = mount(<DemoApp />);
+        const input = wrapper.find(".input-group-addon");
+        input.simulate("click");
+        expect(console.log.args[0][0]).to.equal('failure')
+     });
+ })
