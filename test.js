@@ -8,8 +8,8 @@ chai.use(chaiEnzyme());
 class TestComponent extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Hello, {this.props.name}</h1>
+      <div className="foo" data-index="5">
+          <h1>Hello, {this.props.name}</h1>
       </div>
     );
   }
@@ -20,9 +20,9 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
+describe('Issue #478', () => {
+  it('should find elements with quoted data attribut values', () => {
     const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+    expect(wrapper.find('.foo[data-index="5"]')).to.have.length(1);
   });
 })
