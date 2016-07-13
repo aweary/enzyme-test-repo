@@ -5,24 +5,29 @@ import {mount} from 'enzyme';
 
 chai.use(chaiEnzyme());
 
-class TestComponent extends React.Component {
+class Foo extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
   render() {
     return (
       <div>
-        <h1>Hello, {this.props.name}</h1>
+          {this.props.foo}
       </div>
     );
   }
 }
+
 
 /**
  * Change the `describe` and `it` block so it acurately describes
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
-    const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+describe('Issue 497', () => {
+  it('should return a ReactElement from get()', () => {
+    const wrapper = mount(<Foo foo='foo' />);
+    expect(React.isValidElement(wrapper.get(0))).to.equal(true)
   });
 })
