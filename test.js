@@ -1,17 +1,13 @@
 import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 
 chai.use(chaiEnzyme());
 
-class TestComponent extends React.Component {
+class Foo extends React.Component {
   render() {
-    return (
-      <div>
-        <h1>Hello, {this.props.name}</h1>
-      </div>
-    );
+    return <div />
   }
 }
 
@@ -20,9 +16,21 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
-    const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+describe('CSS selector parity', () => {
+  it('should work with mount', () => {
+    const wrapper = mount(
+      <div>
+          <Foo bar='baz' />
+      </div>
+    );
+    expect(wrapper.find('Foo[bar="baz"]')).to.have.length(1);
+  });
+  it('should work with shallow', () => {
+    const wrapper = shallow(
+      <div>
+          <Foo bar='baz' />
+      </div>
+    );
+    expect(wrapper.find('Foo[bar="baz"]')).to.have.length(1);
   });
 })
