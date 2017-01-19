@@ -1,16 +1,14 @@
 import React from 'react';
 import chai, {expect} from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import {mount} from 'enzyme';
+import {shallow} from 'enzyme';
 
 chai.use(chaiEnzyme());
 
-class TestComponent extends React.Component {
+class RendersAZero extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Hello, {this.props.name}</h1>
-      </div>
+      <div>{[].length && '1'}</div>
     );
   }
 }
@@ -20,9 +18,9 @@ class TestComponent extends React.Component {
  * the test that you are trying to reproduce.
  */
 
-describe('AN EXAMPLE TEST SUITE', () => {
-  it('ENTER YOUR DESCRIPTION HERE', () => {
-    const wrapper = mount(<TestComponent/>);
-    expect(true).to.equal(true);
+describe('Issue #766', () => {
+  it('renders 0 when doing [].length && 1', () => {
+    const wrapper = shallow(<RendersAZero/>);
+    expect(wrapper.html()).to.equal('<div>0</div>');
   });
 })
