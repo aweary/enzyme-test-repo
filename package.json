@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "enzyme": "^2.3.0",
-    "jsdom": "^9.0.0"
+    "jsdom": "^9.0.0",
+    "sinon": "^1.17.7"
   }
 }
